@@ -45,14 +45,61 @@ TreeNode<int>* takeInputLevelWise() {
 }
 
 // craete a pair class pair 
-class Pair
+class pairr
 {
   public:
-    TreeNode<int>* maxCurr;
-    TreeNode<int>* smaxCurr;
+    TreeNode<int>* first;
+    TreeNode<int>* second;
+    pairr(TreeNode<int>* root)
+    {
+       first=root;
+        second=NULL;
+    }
 };
-// function to return node Secondlargestelement in tree 
 
+// function to return node Secondlargestelement in tree 
+void doit(TreeNode<int>* root,pairr &p){
+    int rootData=root->data;
+    int max=p.first->data;
+  
+    if(p.second==NULL){
+      if(rootData==max){
+        //Discard
+      }
+      else if(rootData>max){
+        p.second=p.first;
+        p.first=root;
+      }
+      else{
+        p.second=root;
+      }
+    }
+    //Other wise
+    else{
+      if(rootData==max){
+        //Discard
+      }
+      else if(rootData>max){
+        p.second=p.first;
+        p.first=root;
+      }
+      else if(rootData==p.second->data){
+        //discard
+      }
+      else if(rootData>p.second->data){
+        p.second=root;
+      }
+    }
+    for(int i=0;i<root->children.size();i++){
+        doit(root->children[i],p);
+    }
+}
+TreeNode<int>* getSecondLargestNode(TreeNode<int>* root) {
+    // Write your code here
+    pairr p(root);
+    doit(root,p);
+    return p.second;
+}
 
 int main() {
     TreeNode<int>* root = takeInputLevelWise();
