@@ -27,6 +27,21 @@ string uniqueChar(string s) {
     }
     return str;
 }
+string uniqueChars(string str)
+{
+    unordered_set<char> charAns;
+    string a;
+    for(auto ch : str)
+    {
+        if(charAns.find(ch)==charAns.end())
+        {
+            a.push_back(ch);
+            charAns.insert(ch);
+        }
+
+    }
+    return a;
+}
 int main() {
     string str;
     cin >> str;
