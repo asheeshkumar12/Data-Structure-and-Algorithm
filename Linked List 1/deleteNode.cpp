@@ -37,3 +37,26 @@ Node *deleteNode(Node *head, int pos)
     }
     return head;
 }
+
+
+
+// recursive solution of delete a node
+
+
+Node *deleteNodeRec(Node *head, int pos) {
+    
+	//Write your code here
+    if(pos==0 && head!=NULL)
+    {
+        Node *temp=head;
+        head=head->next;
+        delete temp;
+        return head;
+        
+    }
+    if(head==NULL)
+         return head;
+    Node *a=deleteNodeRec(head->next,pos-1);
+    head->next=a;
+    return head;
+}
