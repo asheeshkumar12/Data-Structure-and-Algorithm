@@ -10,3 +10,13 @@ int length(Node *head)
     }
     return count;
 }
+
+// recursive solution 
+int length(Node *head) {
+    // Write your code here
+    int count=0;
+    if(head==NULL)
+        return 0;
+    else 
+         return 1+length(head->next);
+}
